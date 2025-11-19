@@ -1,4 +1,3 @@
-import { PlayCircleIcon } from 'lucide-react'
 import Ciclos from './Components/Ciclos'
 import Contador from './Components/Contador'
 import Container from './Components/Container'
@@ -6,10 +5,13 @@ import DefaultButton from './Components/DefaultButton'
 import DefaultInput from './Components/DefaultInput'
 import Logo from './Components/Logo'
 import Menu from './Components/Menu'
+import Footer from './Components/Footer'
+
+import { PlayCircleIcon } from 'lucide-react'
 
 import './styles/global.css'
 import './styles/theme.css'
-import Footer from './Components/Footer'
+
 
 export default function App() {
     return (
@@ -47,7 +49,7 @@ export default function App() {
                     </div>
 
                     <div className="formRow">
-                        <DefaultButton icon={<PlayCircleIcon />} color='green'/>
+                        <DefaultButton icon={<PlayCircleIcon />} color='green' />
                     </div>
                 </form>
             </Container>
