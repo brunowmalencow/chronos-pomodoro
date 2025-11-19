@@ -1,4 +1,4 @@
-import { HouseIcon, SettingsIcon, Sun, TimerIcon } from "lucide-react";
+import { HouseIcon, MoonIcon, SettingsIcon, Sun, TimerIcon } from "lucide-react";
 
 import styles from './styles.module.css'
 import { useState, useEffect } from "react";
@@ -10,6 +10,8 @@ export default function Menu() {
         const savedTheme = localStorage.getItem('theme');
         return (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light';
     });
+
+    const nextThemeIcon = theme === 'dark' ? <Sun /> : <MoonIcon />;
 
     function toggleTheme() {
         if (theme === 'dark') {
@@ -42,7 +44,7 @@ export default function Menu() {
             </a>
 
             <a className={styles.menuLink} aria-label="Theme" title="Theme" onClick={toggleTheme}>
-                <Sun />
+                {nextThemeIcon}
             </a>
 
         </nav>
