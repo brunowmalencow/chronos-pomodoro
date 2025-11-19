@@ -9,7 +9,7 @@ export default function Logo() {
                 
                 <TimerIcon />
                 
-                <span>
+                <span style={{ cursor: "default" }}>
                     CHRONOS
                 </span>
             
