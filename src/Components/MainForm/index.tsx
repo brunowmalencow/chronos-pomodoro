@@ -2,8 +2,9 @@ import { PlayCircleIcon } from "lucide-react";
 import Ciclos from "../Ciclos";
 import DefaultButton from "../DefaultButton";
 import DefaultInput from "../DefaultInput";
+import type { HomeProps } from "../../pages/Home";
 
-export default function MainForm() {
+export default function MainForm({state}: HomeProps) {
     return (
         <form className='form' action="">
             <div className="formRow">

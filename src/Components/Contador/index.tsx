@@ -1,13 +1,10 @@
-import { useState } from 'react'
-
 import styles from './styles.module.css'
+import type { HomeProps } from '../../pages/Home'
 
-//const [state, setState] = useState(0)
-
-export default function Contador() {
+export default function Contador({state}: HomeProps) {
     return (
         <div className={styles.contador}>
-            00:00
+            {state.formatedSecondsRemaining}
         </div>
     )
 }
