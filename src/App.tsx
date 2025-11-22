@@ -3,28 +3,12 @@ import './styles/theme.css'
 
 import Home from './pages/Home'
 
-import { act, useState } from 'react'
-import type { TaskStateModel } from './models/TaskStateModel'
-
-
-const initialState: TaskStateModel ={
-    tasks: [],
-    secondsRemaining: 0,
-    formatedSecondsRemaining: '00:00',
-    activeTask: null,
-    currentCycle: 0,
-    config: {
-        workTime: 25,
-        shortBreakTime: 5,
-        longBreakTime: 15,
-        
-    }
-}
+import { TaskContextProvider } from './Contexts/TaskContext'
 
 export default function App() {
-    const [state, setState] = useState(initialState)
-
     return (
-        <Home state={state} setState={setState}/>
+        <TaskContextProvider>
+            <Home />
+        </TaskContextProvider>
     )
 }
