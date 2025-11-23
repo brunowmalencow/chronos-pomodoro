@@ -4,7 +4,7 @@ export type TaskModel = {
     id: string;
     name: string;
     duration: number;
-    completed: boolean;
+    completed?: boolean;
     startDate: number;
     completeDate: number | null;
     interruptedDate: number | null;
