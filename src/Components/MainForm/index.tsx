@@ -7,17 +7,24 @@ import { PlayCircleIcon } from "lucide-react";
 import { useTaskContext } from "../../Contexts/TaskContext/useTaskContext";
 import type { TaskModel } from "../../models/TaskModel";
 import { useRef } from "react";
+import { getNextCycle } from "../../Utils/getNextCycle";
+import { getNextCycleType } from "../../Utils/getNextCycleType";
+import { formatSecondsToMinutes } from "../../Utils/formatSecondstoMinutes";
 
 export default function MainForm() {
-    const { setState } = useTaskContext()
+    const { state, setState } = useTaskContext()
     const taskNameInput = useRef<HTMLInputElement>(null)
+
+    //Ciclos
+    const nextCycle = getNextCycle(state.currentCycle)
+    const nextCycleType = getNextCycleType(nextCycle)
 
     function handleSubmitTask(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
         if (taskNameInput.current === null) return
 
+        //O trim() serve para acabar com os espaçamentos desnecessários
         const taskName = taskNameInput.current.value.trim()
-        //o trim() serve para acabar com os espaçamentos desnecessários
 
         if (!taskName) {
             alert('Digite sua tarefa')
@@ -30,8 +37,8 @@ export default function MainForm() {
             startDate: Date.now(),
             completeDate: null,
             interruptedDate: null,
-            duration: 1,
-            type: 'workTime',
+            duration: state.config[nextCycleType],
+            type: nextCycleType,
         }
 
         const secondsRemaining = newTask.duration * 60
@@ -40,10 +47,10 @@ export default function MainForm() {
             return {
                 ...prevState,
                 activeTask: newTask,
-                currentCycle: 1,
+                currentCycle: nextCycle,
                 secondsRemaining: secondsRemaining,
-                formatedSecondsRemaining: '00:00',
-                tasks:[...prevState.tasks, newTask],
+                formatedSecondsRemaining: formatSecondsToMinutes(secondsRemaining),
+                tasks: [...prevState.tasks, newTask],
             }
         })
     }
@@ -66,9 +73,11 @@ export default function MainForm() {
                 </div>
             </div>
 
-            <div className="formRow">
-                <Ciclos />
-            </div>
+            {state.currentCycle > 0 && (
+                <div className="formRow">
+                    <Ciclos />
+                </div>
+            )}
 
             <div className="formRow">
                 <DefaultButton icon={<PlayCircleIcon />} color='green' />
