@@ -1,5 +1,5 @@
-import type { TaskStateModel } from "../models/TaskStateModel";
-import { TaskActionTypes, type TaskActionModel } from "./TaskContext/taskActions";
+import type { TaskStateModel } from "../../models/TaskStateModel";
+import { TaskActionTypes, type TaskActionModel } from "./taskActions";
 
 export function taskReducer(state: TaskStateModel, action: TaskActionModel) : TaskStateModel{
     
@@ -7,15 +7,14 @@ export function taskReducer(state: TaskStateModel, action: TaskActionModel) : Ta
         case TaskActionTypes.START_TASK:{
             return state
         }
-        case TaskActionTypes.INTERRUPT_TASK{
+        case TaskActionTypes.INTERRUPT_TASK:{
             return state
         }
-        case TaskActionTypes.RESET_STATE{
+        case TaskActionTypes.RESET_STATE:{
             return state
         }
     }
     
-
     // SEMPRE DEVE RETORNAR O ESTADO (state)
     return state
 }
