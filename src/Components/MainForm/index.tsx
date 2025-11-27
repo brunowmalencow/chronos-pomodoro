@@ -2,7 +2,7 @@ import Ciclos from "../Ciclos";
 import DefaultButton from "../DefaultButton";
 import DefaultInput from "../DefaultInput";
 
-import { PlayCircleIcon } from "lucide-react";
+import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 
 import { useTaskContext } from "../../Contexts/TaskContext/useTaskContext";
 import type { TaskModel } from "../../models/TaskModel";
@@ -55,15 +55,32 @@ export default function MainForm() {
         })
     }
 
+    function handleInterruptTask() {
+        setState(prevState => {
+            return {
+                ...prevState,
+                activeTask: null,
+                secondsRemaining: 0,
+                formatedSecondsRemaining: '00:00',
+                tasks: prevState.tasks.map(task => {
+                    if (prevState.activeTask && prevState.activeTask.id === task.id) {
+                        return {...task, interruptedDate: Date.now()}
+                    }
+                    return task
+                })
+            }
+        })
+    }
+
     return (
         <form onSubmit={handleSubmitTask} className='form' action="">
             <div className="formRow">
                 <DefaultInput
-                    required
                     type='text'
                     id="meuInput"
-                    placeholder='Digite sua tarefa'
+                    required
                     ref={taskNameInput}
+                    disabled={!!state.activeTask}
                 />
             </div>
 
@@ -80,7 +97,28 @@ export default function MainForm() {
             )}
 
             <div className="formRow">
-                <DefaultButton icon={<PlayCircleIcon />} color='green' />
+                {/*Para que não haja o reaproveitamento do proprio react do botão
+                    use o atributo KEY para que ele não confuda os botões*/}
+                {!state.activeTask ? (
+                    <DefaultButton
+                        aria-label="Nova tarefa"
+                        title="Nova tarefa"
+                        type="submit"
+                        icon={<PlayCircleIcon />}
+                        color='green'
+                        key={'submitTask'} />
+                ) : (
+                    <DefaultButton
+                        aria-label="Parar tarefa"
+                        title="Parar tarefa"
+                        type="button"
+                        icon={<StopCircleIcon />}
+                        color='red'
+                        onClick={handleInterruptTask}
+                        key={'stopTask'}
+                    />
+
+                )}
             </div>
         </form>
     )
