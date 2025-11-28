@@ -27,6 +27,4 @@ export type TaskActionsWithoutPayload = {
   type: TaskActionTypes.RESET_STATE;
 };
 
-export type TaskActionModel =
-  | TaskActionsWithPayload
-  | TaskActionsWithoutPayload;
+export type TaskActionModel = TaskActionsWithPayload | TaskActionsWithoutPayload;
