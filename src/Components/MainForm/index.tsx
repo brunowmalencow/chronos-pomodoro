@@ -5,22 +5,21 @@ import DefaultInput from "../DefaultInput";
 import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 
 import { useTaskContext } from "../../Contexts/TaskContext/useTaskContext";
-import type { TaskModel } from "../../models/TaskModel";
 import { useRef } from "react";
 import { getNextCycle } from "../../Utils/getNextCycle";
 import { getNextCycleType } from "../../Utils/getNextCycleType";
-import { formatSecondsToMinutes } from "../../Utils/formatSecondstoMinutes";
 import { TaskActionTypes } from "../../Contexts/TaskContext/taskActions";
+import type { TaskModel } from "../../models/TaskModel";
 
 export default function MainForm() {
     const { state, dispatch } = useTaskContext()
-    const taskNameInput = useRef < HTMLInputElement > (null)
+    const taskNameInput = useRef<HTMLInputElement>(null)
 
     //Ciclos
     const nextCycle = getNextCycle(state.currentCycle)
     const nextCycleType = getNextCycleType(nextCycle)
 
-    function handleSubmitTask(event: React.FormEvent<HTMLFormElement>) {
+    function handleSubmitTask(event: React.FormEvent<HTMLElement>) {
         event.preventDefault()
         if (taskNameInput.current === null) return
 
@@ -45,8 +44,8 @@ export default function MainForm() {
         dispatch({ type: TaskActionTypes.START_TASK, payload: newTask })
     }
 
-    function handleInterruptTask() {
-        dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
+    function handleInterruptTask(){
+        dispatch({ type: TaskActionTypes.INTERRUPT_TASK, payload: null })
     }
 
     return (
@@ -76,25 +75,26 @@ export default function MainForm() {
             <div className="formRow">
                 {/*Para que não haja o reaproveitamento do proprio react do botão
                     use o atributo KEY para que ele não confuda os botões*/}
-                {!state.activeTask ? (
+                {!state.activeTask && (
                     <DefaultButton
                         aria-label="Nova tarefa"
                         title="Nova tarefa"
                         type="submit"
                         icon={<PlayCircleIcon />}
                         color='green'
-                        key={'submitTask'} />
-                ) : (
-                    <DefaultButton
-                        aria-label="Parar tarefa"
-                        title="Parar tarefa"
-                        type="button"
-                        icon={<StopCircleIcon />}
-                        color='red'
-                        onClick={handleInterruptTask}
-                        key={'stopTask'}
-                    />
+                        key='submitTask' />
+                )}
 
+                {state.activeTask && (
+                    <DefaultButton
+                        aria-label='Interromper tarefa atual'
+                        title='Interromper tarefa atual'
+                        type="button"
+                        color='red'
+                        icon={<StopCircleIcon />}
+                        onClick={handleInterruptTask}
+                        key='stopTask'
+                    />
                 )}
             </div>
         </form>
