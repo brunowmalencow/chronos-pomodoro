@@ -1,17 +1,12 @@
-
-.container-fluid{
-    max-width: auto;
+.container-fluid {
+  max-width: auto;
 }
 
-.container{
-    max-width: 98rem;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-self: center;
-    text-align: center;
+.container {
+  max-width: 98rem;
+  margin: 0 auto;
 }
 
-.content{
-    margin: 3.2rem;
+.content {
+  margin: 3.2rem;
 }

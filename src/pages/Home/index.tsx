@@ -1,20 +1,23 @@
-import Contador from "../../Components/Contador";
-import Container from "../../Components/Container";
-import MainForm from "../../Components/MainForm";
-import MainTemplate from "../../templates/MainTemplate";
+import { useEffect } from 'react';
+import { Container } from '../../components/Container';
+import { CountDown } from '../../components/CountDown';
+import { MainForm } from '../../components/MainForm';
+import { MainTemplate } from '../../templates/MainTemplate';
 
-export default function Home() {  
-    return (
-        <>
-            <MainTemplate>
-                <Container>
-                    <Contador />
-                </Container>
+export function Home() {
+  useEffect(() => {
+    document.title = 'Chronos Pomodoro';
+  }, []);
 
-                <Container>
-                    <MainForm />
-                </Container>
-            </MainTemplate>
-        </>
-    )
+  return (
+    <MainTemplate>
+      <Container>
+        <CountDown />
+      </Container>
+
+      <Container>
+        <MainForm />
+      </Container>
+    </MainTemplate>
+  );
 }

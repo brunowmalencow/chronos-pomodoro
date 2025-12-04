@@ -1,29 +1,27 @@
 .menu {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6rem;
 }
 
-.menuLink{
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--primary);
-    color: var(--text-over-primary);
-    padding: 1.2rem;
-    border-radius: .8rem;
-    transition: all .2s ease-in-out;
-    color: var();
-    cursor: pointer;
+.menuLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  background: var(--primary);
+  color: var(--text-over-primary);
+  transition: all 0.1s ease-in-out;
+  padding: 1.2rem;
+  border-radius: 0.8rem;
 }
 
-.menuLink:hover{
-    box-shadow: 0 0 10px var(--primary-dark);
-    transform: translateY(-2px);
+.menuLink:hover {
+  filter: brightness(80%);
 }
 
-.menuLink svg{
-    width: 2.4rem;
-    height: 2.4rem;
+.menuLink svg {
+  width: 2.4rem;
+  height: 2.4rem;
 }

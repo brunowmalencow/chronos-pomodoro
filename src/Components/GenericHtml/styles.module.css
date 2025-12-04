@@ -1,7 +1,6 @@
 .genericHtml h1 {
   font-size: 3.2rem;
   margin-bottom: 1.6rem;
-  color: var(--link-color);
 }
 
 .genericHtml h2 {
@@ -44,22 +43,4 @@
   border-radius: 0.8rem;
   display: block;
   margin: 1.6rem 0;
-}
-
-
-
-.genericHtml svg{
-  animation: floating 3s ease-in-out infinite;
-}
-
-@keyframes floating{
-  0%{
-    transform: translateY(0px);
-  }
-  50%{
-    transform: translateY(-10px);
-  }
-  100%{
-    transform: translateY(0px);
-  }
 }

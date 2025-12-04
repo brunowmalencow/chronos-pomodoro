@@ -1,18 +1,20 @@
-import styles from './styles.module.css'
+import styles from './styles.module.css';
 
 type DefaultInputProps = {
-    id: string,
-    labelText?: string,
-} & React.ComponentProps<"input">
+  id: string;
+  labelText: string;
+} & React.ComponentProps<'input'>;
 
-export default function DefaultInput({id, labelText, type, ...rest}: DefaultInputProps) {
-    // Ao invés de ter uma condicional para renderizar a label, pode-se usar o operador lógico '&&'    
-    // {labelText ? (<label htmlFor={id}>{labelText}</label>) : ''}
-    
-    return (
-        <> 
-        {labelText && (<label htmlFor={id}>{labelText}</label>)}
-            <input className={styles.input} type={type} id={id} {...rest} />
-        </>
-    )
+export function DefaultInput({
+  id,
+  type,
+  labelText,
+  ...rest
+}: DefaultInputProps) {
+  return (
+    <>
+      <label htmlFor={id}>{labelText}</label>
+      <input className={styles.input} id={id} type={type} {...rest} />
+    </>
+  );
 }

@@ -1,29 +1,35 @@
-import { useTaskContext } from "../../Contexts/TaskContext/useTaskContext"
-import { getNextCycle } from "../../Utils/getNextCycle"
-import { getNextCycleType } from "../../Utils/getNextCycleType"
+import { useTaskContext } from '../../contexts/TaskContext/useTaskContext';
+import { getNextCycle } from '../../utils/getNextCycle';
+import { getNextCycleType } from '../../utils/getNextCycleType';
 
-export default function Tips() {
-    //Tipos
-    const { state } = useTaskContext()
-    const nextCycle = getNextCycle(state.currentCycle)
-    const nextCycleType = getNextCycleType(nextCycle)
+export function Tips() {
+  const { state } = useTaskContext();
+  const nextCycle = getNextCycle(state.currentCycle);
+  const nextCyleType = getNextCycleType(nextCycle);
 
-    const tipsForWhenActiveTask = {
-        workTime: <span>Foque por {state.config.workTime}min</span>,
-        shortBreakTime: <span>Descanso por: {state.config.shortBreakTime}min</span>,
-        longBreakTime: <span>Próximo descanso será longo</span>,
-    }
+  // Tips
+  const tipsForWhenActiveTask = {
+    workTime: <span>Foque por {state.config.workTime}min</span>,
+    shortBreakTime: <span>Descanse por {state.config.shortBreakTime}min</span>,
+    longBreakTime: <span>Descanso longo</span>,
+  };
 
-    const tipsForNoActiveTask = {
-        workTime: <span>Próximo Ciclo é de: {state.config.workTime}min</span>,
-        shortBreakTime: <span>Próximo descanso é de: {state.config.shortBreakTime}min</span>,
-        longBreakTime: <span>Descanso longo</span>,
-    }
+  const tipsForNoActiveTask = {
+    workTime: (
+      <span>
+        Próximo ciclo é de <b>{state.config.workTime}min</b>
+      </span>
+    ),
+    shortBreakTime: (
+      <span>Próximo descaso é de {state.config.shortBreakTime}min</span>
+    ),
+    longBreakTime: <span>Próximo descanso será longo</span>,
+  };
 
-    return (
-        <>
-            {state.activeTask && tipsForWhenActiveTask[state.activeTask.type]}
-            {!state.activeTask && tipsForNoActiveTask[nextCycleType]}
-        </>
-    )
+  return (
+    <>
+      {!!state.activeTask && tipsForWhenActiveTask[state.activeTask.type]}
+      {!state.activeTask && tipsForNoActiveTask[nextCyleType]}
+    </>
+  );
 }

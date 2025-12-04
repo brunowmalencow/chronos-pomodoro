@@ -1,29 +1,28 @@
-import Contador from "../../Components/Contador";
-import Container from "../../Components/Container";
-import Footer from "../../Components/Footer";
-import Logo from "../../Components/Logo";
-import Menu from "../../Components/Menu";
+import { Container } from '../../components/Container';
+import { Footer } from '../../components/Footer';
+import { Logo } from '../../components/Logo';
+import { Menu } from '../../components/Menu';
 
 type MainTemplateProps = {
-    children?: React.ReactNode;
+  children: React.ReactNode;
 };
 
-export default function MainTemplate({ children }: MainTemplateProps) {
-    return (
-        <>
-            <Container>
-                <Logo />
-            </Container>
+export function MainTemplate({ children }: MainTemplateProps) {
+  return (
+    <>
+      <Container>
+        <Logo />
+      </Container>
 
-            <Container>
-                <Menu />
-            </Container>
+      <Container>
+        <Menu />
+      </Container>
 
-            {children}
+      {children}
 
-            <Container>
-                <Footer />
-            </Container>
-        </>
-    )
+      <Container>
+        <Footer />
+      </Container>
+    </>
+  );
 }

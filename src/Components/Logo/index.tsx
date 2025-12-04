@@ -1,19 +1,14 @@
-import { TimerIcon } from "lucide-react";
+import { TimerIcon } from 'lucide-react';
+import styles from './styles.module.css';
+import { RouterLink } from '../RouterLink';
 
-import styles from "./styles.module.css";
-
-export default function Logo() {
-    return (
-        <div className={styles.logo}>
-            <a className={styles.logoLink}>
-                
-                <TimerIcon />
-                
-                <span style={{ cursor: "default" }}>
-                    CHRONOS
-                </span>
-            
-            </a>
-        </div>
-    );
+export function Logo() {
+  return (
+    <div className={styles.logo}>
+      <RouterLink className={styles.logoLink} href='/'>
+        <TimerIcon />
+        <span>Chronos</span>
+      </RouterLink>
+    </div>
+  );
 }

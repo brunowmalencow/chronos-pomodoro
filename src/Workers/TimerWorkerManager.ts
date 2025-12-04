@@ -1,31 +1,32 @@
-import type { TaskStateModel } from "../models/TaskStateModel";
+import { TaskStateModel } from '../models/TaskStateModel';
 
-let workerInstance: TimerWorkerManager | null = null
+let instance: TimerWorkerManager | null = null;
 
 export class TimerWorkerManager {
-    private worker: Worker;
+  private worker: Worker;
 
-    private constructor() {
-        this.worker = new Worker(new URL('../../Workers/timerWorker.js', import.meta.url))
+  private constructor() {
+    this.worker = new Worker(new URL('./timerWorker.js', import.meta.url));
+  }
+
+  static getInstance() {
+    if (!instance) {
+      instance = new TimerWorkerManager();
     }
 
-    static getInstance() {
-        if (!workerInstance) {
-            workerInstance = new TimerWorkerManager()
-        }
-        return workerInstance
-    }
+    return instance;
+  }
 
-    postMessage(message: TaskStateModel){
-        this.worker.postMessage(message)
-    }
+  postMessage(message: TaskStateModel) {
+    this.worker.postMessage(message);
+  }
 
-    onmessage(callback: (event: MessageEvent) => void){
-        this.worker.onmessage = callback
-    }
+  onmessage(cb: (e: MessageEvent) => void) {
+    this.worker.onmessage = cb;
+  }
 
-    terminate(){
-        this.worker.terminate()
-        workerInstance = null
-    }
+  terminate() {
+    this.worker.terminate();
+    instance = null;
+  }
 }

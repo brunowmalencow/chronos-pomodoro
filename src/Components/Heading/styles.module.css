@@ -1,9 +1,6 @@
 .heading {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2.4rem;
-    padding-bottom: 2rem;
-    color: var(--primary-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
 }
